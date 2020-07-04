@@ -102,7 +102,6 @@ stations_visited = end_unique[end_unique['station name']=='Scholes St & Manhatta
 
 i=0 #go for 8 miles?
 start_station = 'Scholes St & Manhattan Ave'
-print("station number {}: {}".format(i,start_station))
 while i < number_stops+1:
     print("station number {}: {}".format(i,start_station))
     route_addition, next_station, start_node, end_node= pathfinder(start_station, miles=2)
@@ -118,7 +117,7 @@ while i < number_stops+1:
     i+=1
     
 #plot route with osmnx
-# fig, ax = ox.plot_graph_routes(G, route, route_color='b', node_size=0)
+fig, ax = ox.plot_graph_routes(G, routes, route_color='b', node_size=0)
 
 #conversion to mapbox thanks to https://medium.com/@shakasom/routing-street-networks-find-your-way-with-python-9ba498147342
 def create_line_df(routes):
@@ -173,10 +172,12 @@ end = plot_df[plot_df['node_end'] == nodes['end_node'].iloc[-1]]
 px.set_mapbox_access_token("pk.eyJ1Ijoic2hha2Fzb20iLCJhIjoiY2plMWg1NGFpMXZ5NjJxbjhlM2ttN3AwbiJ9.RtGYHmreKiyBfHuElgYq_w")
 fig = px.scatter_mapbox(plot_df, lon= "X_from", lat="Y_from", zoom=13, width=1000, height=800, animation_frame='index',mapbox_style="dark")
 fig.data[0].marker = dict(size = 12, color="black")
+
+#first point
 fig.add_trace(px.scatter_mapbox(start, lon= "X_from", lat="Y_from").data[0])
 fig.data[1].marker = dict(size = 15, color="red")
 
-#loop through mid points
+#mid points
 fig.add_trace(px.scatter_mapbox(stop1, lon= "X_from", lat="Y_from").data[0])
 fig.data[2].marker = dict(size = 15, color="green")
 fig.add_trace(px.scatter_mapbox(stop2, lon= "X_from", lat="Y_from").data[0])
