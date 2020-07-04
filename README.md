@@ -1,6 +1,7 @@
 # Safebikingproject
 
 Project Roadmap:
+
 1)Plan out biking routes using Citibike historical ride data from Summer 2019.
 
 2)Create an Arduino sensor with GPS/LTE, Gyroscope, and Accelerometer capabilities. 
